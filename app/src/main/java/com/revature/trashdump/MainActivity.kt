@@ -20,6 +20,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.revature.trashdump.ui.ChooseCompany
 import com.revature.trashdump.ui.Login
 import com.revature.trashdump.ui.Screens
 import com.revature.trashdump.ui.Signup
@@ -60,6 +61,10 @@ fun Navigation(userViewModel: UserViewModel) {
         composable(Screens.SignupScreen.route)
         {
             Signup(userViewModel = userViewModel, navController = navController)
+        }
+        composable(Screens.ChooseCompany.route)
+        {
+            ChooseCompany(navController = navController)
         }
     }
 }

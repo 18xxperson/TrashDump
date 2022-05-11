@@ -13,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -50,13 +51,25 @@ fun Signup(userViewModel: UserViewModel,navController: NavController)
             password=it
         },label = {
             Text(text = "Create password")
-        })
+        },visualTransformation = PasswordVisualTransformation())
         Spacer(modifier = Modifier.height(50.dp))
         Button(onClick = {
-            scope.launch {
-                userViewModel.insertUser(User(username,password),navController)
+            if(username.isNotEmpty() &&password.length>5) {
+                scope.launch {
+                    userViewModel.insertUser(User(username, password), navController)
+                }
+                navController.navigate(Screens.LoginScreen.route)
             }
-            navController.navigate(Screens.LoginScreen.route)
+            else{
+                if(username.isEmpty())
+                {
+                    Toast.makeText(context,"Please enter a username",Toast.LENGTH_LONG).show()
+                }
+                else
+                {
+                    Toast.makeText(context,"Please enter a long enough password",Toast.LENGTH_LONG).show()
+                }
+            }
         },Modifier.fillMaxWidth()) {
             Text(text = "Signup")
         }
