@@ -3,15 +3,17 @@ package com.revature.trashdump
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.NavController
@@ -64,15 +66,18 @@ fun Navigation(userViewModel: UserViewModel) {
 
 @Composable
 fun MainScreen(navController: NavController) {
-    Column() {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = "Welcome to trash Dump",fontSize = 30.sp)
+        Spacer(modifier = Modifier.height(50.dp))
         Button(onClick = {
             navController.navigate(Screens.LoginScreen.route)
-        }) {
+        },Modifier.fillMaxWidth()) {
             Text(text = "Login")
         }
+        Spacer(modifier = Modifier.height(50.dp))
         Button(onClick = {
             navController.navigate(Screens.SignupScreen.route)
-        }) {
+        },Modifier.fillMaxWidth()) {
             Text(text = "Signup")
         }
     }
